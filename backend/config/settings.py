@@ -72,8 +72,9 @@ if os.getenv("DB_ENGINE", "mysql").lower() == "mysql":
             "HOST": os.getenv("DB_HOST", "127.0.0.1"),
             "PORT": os.getenv("DB_PORT", "3306"),
             "OPTIONS": {
-                "charset": "utf8mb4",
-            },
+    "charset": "utf8mb4",
+    "ssl": {},
+},
         }
     }
 else:
@@ -111,13 +112,12 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+
 CORS_ALLOWED_ORIGINS = [
-    x.strip()
-    for x in os.getenv(
-        "CORS_ALLOWED_ORIGINS", "http://localhost:5173"
-    ).split(",")
-    if x.strip()
+    "http://localhost:5173",
+    "https://city-hospital-eight.vercel.app",
 ]
+
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
